@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="dark">
-<title>About Me | MENDOZA</title>
+<title>About Me &amp; Gallery | MENDOZA</title>
 <meta name="description" content="Get to know the person behind MENDOZA.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --black:#050505; --deep:#6A0DAD; --bright:#9B30FF; --soft:#B66DFF; --white:#FFFFFF;
+  --black:#050505; --dark:#12001F; --deep2:#24003D; --primary:#7B2CFF; --deep:#6A0DAD; --bright:#9B30FF; --soft:#B66DFF; --white:#FFFFFF;
   --glass:rgba(255,255,255,.04); --line:rgba(155,48,255,.28); --muted:rgba(255,255,255,.66);
   --head:"Chakra Petch","Rajdhani","Segoe UI",system-ui,sans-serif;
   --body:"Manrope","Segoe UI",system-ui,-apple-system,sans-serif;
@@ -204,6 +204,100 @@ footer small{color:rgba(255,255,255,.4)}
   *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
   .js .rv{opacity:1;transform:none}
 }
+/* ---------- 6. GALLERY (3 × 4) ---------- */
+.gallery-intro{margin:-20px 0 clamp(28px,4vw,44px);max-width:56ch;color:var(--muted);font-weight:300;font-size:1.08rem}
+.gallery{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,28px)}
+.gallery li{min-width:0}
+
+.tile{position:relative;display:block;width:100%;aspect-ratio:1/.92;padding:0;border:1px solid var(--line);border-radius:22px;overflow:hidden;cursor:pointer;
+      background:var(--dark);isolation:isolate;
+      box-shadow:0 0 22px -8px rgba(123,44,255,.55);
+      transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .4s,box-shadow .4s}
+.tile:hover,.tile:focus-visible{transform:translateY(-10px);border-color:var(--soft);
+      box-shadow:0 0 0 1px rgba(192,132,252,.4),0 0 34px 2px rgba(123,44,255,.6),0 24px 50px -12px rgba(123,44,255,.55)}
+
+/* image */
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;transition:transform .8s cubic-bezier(.2,.8,.2,1),filter .6s}
+.tile:hover img,.tile:focus-visible img{transform:scale(1.1)}
+.tile.missing img{display:none}
+
+/* placeholder shown until you add a real photo */
+.ph{position:absolute;inset:0;z-index:0;display:grid;place-items:center;align-content:center;gap:6px;color:var(--soft);
+    background:
+      repeating-linear-gradient(0deg,rgba(168,85,247,.07) 0 1px,transparent 1px 34px),
+      repeating-linear-gradient(90deg,rgba(168,85,247,.07) 0 1px,transparent 1px 34px),
+      radial-gradient(90% 80% at 50% 0%,rgba(123,44,255,.45),transparent 70%),
+      linear-gradient(160deg,var(--deep2),var(--dark) 70%)}
+.ph .ic{width:2.4rem;height:2.4rem;opacity:.85}
+.ph b{font-family:var(--head);font-weight:700;font-size:clamp(3rem,7vw,4.6rem);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(192,132,252,.55)}
+
+/* dark overlay */
+.shade{position:absolute;inset:0;z-index:2;pointer-events:none;
+       background:linear-gradient(180deg,rgba(5,5,5,.15) 0%,rgba(5,5,5,0) 35%,rgba(5,5,5,.88) 100%);transition:background .5s}
+.tile:hover .shade,.tile:focus-visible .shade{background:linear-gradient(180deg,rgba(18,0,31,.55) 0%,rgba(18,0,31,.7) 45%,rgba(5,5,5,.94) 100%)}
+
+/* number pill */
+.num{position:absolute;top:14px;left:14px;z-index:3;font-family:var(--head);font-weight:600;font-size:.82rem;letter-spacing:.16em;padding:5px 12px;border-radius:999px;
+     background:rgba(5,5,5,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line);color:var(--soft);
+     transition:background .35s,color .35s,box-shadow .35s}
+.tile:hover .num,.tile:focus-visible .num{background:var(--primary);color:var(--white);box-shadow:0 0 18px var(--primary)}
+
+/* caption */
+.cap{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:20px 22px 22px;text-align:left;display:block}
+.cap strong{display:block;font-family:var(--head);font-weight:600;font-size:1.25rem;letter-spacing:.08em;line-height:1.2;text-transform:uppercase;
+            padding-left:12px;border-left:3px solid var(--bright);box-shadow:-8px 0 14px -10px var(--bright);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.cap em{display:block;font-style:normal;font-size:.92rem;line-height:1.5;color:rgba(255,255,255,.85);max-height:0;margin-top:0;opacity:0;overflow:hidden;
+        transition:max-height .5s cubic-bezier(.2,.8,.2,1),margin-top .5s,opacity .45s .1s}
+.tile:hover .cap em,.tile:focus-visible .cap em{max-height:4.5rem;margin-top:8px;opacity:1}
+
+/* expand icon */
+.zoom{position:absolute;top:12px;right:12px;z-index:3;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;
+      background:rgba(123,44,255,.85);color:#fff;box-shadow:0 0 20px rgba(123,44,255,.9);opacity:0;transform:scale(.7) rotate(-12deg);
+      transition:opacity .35s,transform .45s cubic-bezier(.2,.8,.2,1)}
+.tile:hover .zoom,.tile:focus-visible .zoom{opacity:1;transform:none}
+
+/* ---------- 7. LIGHTBOX ---------- */
+.lb{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:calc(64px + env(safe-area-inset-top,0px)) 20px calc(24px + env(safe-area-inset-bottom,0px));
+    visibility:hidden;opacity:0;transition:opacity .4s ease,visibility 0s .4s}
+.lb.open{visibility:visible;opacity:1;transition:opacity .4s ease}
+.lb__bg{position:absolute;inset:0;background:radial-gradient(70% 70% at 50% 40%,rgba(36,0,61,.92),rgba(5,5,5,.97));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.lb__fig{position:relative;margin:0;width:min(1000px,100%);max-height:100%;display:grid;gap:16px;transform:translateY(24px) scale(.96);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.lb.open .lb__fig{transform:none}
+.lb__media{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--soft);background:var(--dark);
+           aspect-ratio:16/10;max-height:calc(100vh - 230px);max-height:calc(100dvh - 230px);width:100%;
+           box-shadow:0 0 0 1px rgba(192,132,252,.25),0 0 50px 4px rgba(123,44,255,.5),0 30px 80px -20px rgba(0,0,0,.8);
+           transition:opacity .28s,transform .28s}
+.lb__media.swap{opacity:0;transform:translateX(var(--dir,24px)) scale(.98)}
+.lb__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000;z-index:1}
+.lb__media.missing img{display:none}
+.lb__cap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;transition:opacity .28s}
+.lb__cap.swap{opacity:0}
+.lb__cap h3{margin:0;font-family:var(--head);font-weight:700;font-size:clamp(1.25rem,3vw,1.8rem);letter-spacing:.08em;text-transform:uppercase}
+.lb__cap p{margin:2px 0 0;color:var(--muted);font-size:.95rem}
+.lb__count{font-family:var(--head);font-weight:600;letter-spacing:.2em;color:var(--soft);padding:7px 16px;border:1px solid var(--line);border-radius:999px;background:rgba(123,44,255,.12);white-space:nowrap}
+.lb__btn{position:absolute;z-index:3;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:var(--white);
+         border:1px solid var(--line);background:rgba(18,0,31,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+         transition:background .3s,box-shadow .3s,transform .3s,border-color .3s}
+.lb__btn:hover{background:var(--primary);border-color:var(--soft);box-shadow:0 0 28px var(--primary)}
+.lb__btn .ic{width:1.5rem;height:1.5rem}
+.lb__close{top:calc(14px + env(safe-area-inset-top,0px));right:18px}
+.lb__close:hover{transform:rotate(90deg)}
+.lb__prev,.lb__next{top:50%;margin-top:-26px}
+.lb__prev{left:clamp(10px,3vw,40px)}.lb__next{right:clamp(10px,3vw,40px)}
+.lb__prev:hover{transform:translateX(-3px)}.lb__next:hover{transform:translateX(3px)}
+
+
+@media (max-width:980px){.gallery{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){
+  .gallery{grid-template-columns:1fr}
+  .lb__prev,.lb__next{top:auto;bottom:calc(22px + env(safe-area-inset-bottom,0px));margin:0}
+  .lb__prev{left:calc(50% - 64px)}.lb__next{right:calc(50% - 64px)}
+  .lb__fig{padding-bottom:70px}
+  .lb__media{aspect-ratio:4/5;max-height:calc(100dvh - 290px)}
+}
+@media (hover:none){.cap em{max-height:4.5rem;margin-top:8px;opacity:1}}
+body.lb-open{overflow:hidden}
+.menu a[aria-current="page"]{position:relative}
 </style>
 </head>
 <body>
@@ -231,6 +325,15 @@ footer small{color:rgba(255,255,255,.4)}
   <symbol id="i-ig" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"/></symbol>
   <symbol id="i-yt" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><path d="M9.75 15.02l5.75-3.02-5.75-3.02z"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></symbol>
+  <symbol id="i-palette" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r="1"/><circle cx="17.5" cy="10.5" r="1"/><circle cx="8.5" cy="7.5" r="1"/><circle cx="6.5" cy="12.5" r="1"/><path d="M12 2a10 10 0 0 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1.1.9-2 2-2H18a4 4 0 0 0 4-4c0-5-4.5-9.4-10-9.4z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></symbol>
+  <symbol id="i-expand" viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></symbol>
+  <symbol id="i-l" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></symbol>
+  <symbol id="i-r" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></symbol>
 </svg>
 
 <div class="aura" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -242,12 +345,11 @@ footer small{color:rgba(255,255,255,.4)}
     <button class="burger" aria-label="Toggle menu" aria-expanded="false" aria-controls="menu"><span></span></button>
     <nav aria-label="Main">
       <ul class="menu" id="menu">
-        <!-- Point these hrefs to your real pages (index.html, projects.html, ...) -->
         <li><a href="index.html">HOME</a></li>
-        <li><a href="#top" aria-current="page">ABOUT ME</a></li>
+        <li><a href="#top" data-spy="about" aria-current="page">ABOUT ME</a></li>
         <li><a href="index.html">PROJECTS</a></li>
-        <li><a href="gallery.html">GALLERY</a></li>
-        <li><a href="#">CONTACT</a></li>
+        <li><a href="#gallery" data-spy="gallery">GALLERY</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
       </ul>
     </nav>
   </div>
@@ -257,15 +359,15 @@ footer small{color:rgba(255,255,255,.4)}
 
   <section class="hero" aria-labelledby="t">
     <div class="wrap">
-      <h1 id="t" class="rv">about me</h1>
+      <h1 id="t" class="rv">ABOUT ME</h1>
       <p class="rv" style="--d:.12s">Get to know the person behind MENDOZA.</p>
       <div class="rule rv" style="--d:.24s"></div>
     </div>
   </section>
 
   <!-- PERSONAL INFORMATION -->
-  <section aria-rap"></section>labelledby="info-h" style="padding-top:clamp(32px,5vw,56px)">
-    <div class="w
+  <section aria-labelledby=
+    <div class="wrap">
       <div class="sec-head rv"><h2 id="info-h">PERSONAL INFO</h2></div>
       <div class="profile">
 
@@ -275,7 +377,7 @@ footer small{color:rgba(255,255,255,.4)}
           </div>
           <h3>Jamaine Mendoza</h3>
           <p class="role">Programmer &amp; Developer</p>
-          <span class="status"><i></i>Open to new gall</span>
+          <span class="status"><i></i>Open to new projects</span>
         </aside>
 
         <dl class="facts">
@@ -292,7 +394,7 @@ footer small{color:rgba(255,255,255,.4)}
             <dd class="chips"><span>Technology</span><span>Web development</span><span>Graphic design</span><span>Esports</span></dd></div></div>
           <div class="card fact fact--wide rv"><span class="badge"><svg class="ic"><use href="#i-code"/></svg></span><div><dt>SKILLS</dt>
             <dd class="chips"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Video editing</span><span>Communication</span></dd></div></div>
-          <div class="card fact fact--wide rv"><span class="badge"><svg class="ic"><use href="#i-target"/></svg></span><div><dt></dt>
+          <div class="card fact fact--wide rv"><span class="badge"><svg class="ic"><use href="#i-target"/></svg></span><div><dt>PERSONAL GOALS</dt>
             <dd>Become a full-stack developer and build a brand people remember.</dd></div></div>
         </dl>
       </div>
@@ -307,7 +409,7 @@ footer small{color:rgba(255,255,255,.4)}
         <article class="card bio rv">
           <p>I'm Jamaine Mendoza, a programmer and developer who likes turning ideas into things people can click, play and use. Replace this opening line with a sentence that sums up who you are.</p>
           <p>Write about your background here: where you grew up, what you study, and what first pulled you toward code, design and games. Mention the people or moments that shaped how you work.</p>
-          <p>Describe your personality and how you collaborate. Are you the quiet builder, the idea machine, the one who polishes the last pixel? Add a few experiences or gallery you're proud of.</p>
+          <p>Describe your personality and how you collaborate. Are you the quiet builder, the idea machine, the one who polishes the last pixel? Add a few experiences or projects you're proud of.</p>
           <p>Finish with your ambitions: what you want to be building in five years, and the kind of work you want MENDOZA to be known for.</p>
         </article>
         <div class="side">
@@ -315,7 +417,7 @@ footer small{color:rgba(255,255,255,.4)}
           <div class="card stat rv" style="--d:.16s"><small>LEARNING NOW</small><strong>Full-stack JavaScript</strong></div>
           <div class="card stat rv" style="--d:.24s"><small>REACH ME</small><strong style="font-size:1.05rem;word-break:break-all">jmaainebaring@gmail.com</strong></div>
         </div>
-      </div>PERSONAL GOALS
+      </div>
     </div>
   </section>
 
@@ -376,7 +478,185 @@ footer small{color:rgba(255,255,255,.4)}
       </div>
     </div>
   </section>
+
+  <!-- GALLERY -->
+  <!--
+    HOW TO REPLACE A PHOTO
+    Each card has ONE <img src="images/galleryN.jpg">. Put your photo in an
+    "images" folder with that name, or change the src. Title/caption = the
+    <strong>/<em> text in the card plus its data-title / data-desc.
+    Until a photo exists, a purple placeholder is shown automatically.
+  -->
+  <section id="gallery" aria-labelledby="gal-h">
+    <div class="wrap">
+      <div class="sec-head rv"><h2 id="gal-h">GALLERY</h2></div>
+      <p class="gallery-intro rv">A collection of moments, memories, interests, and experiences that represent who I am.</p>
+      <ul class="gallery" id="gallery">
+        <!-- ===== 01 · ME — REPLACE IMAGE: images/gallery1.jpg ===== -->
+        <li class="rv" style="--d:0.00s">
+          <button class="tile" type="button" data-title="Me" data-desc="The person behind MENDOZA." aria-label="Open photo 01: Me">
+            <span class="ph" aria-hidden="true"><svg class="ic"><use href="#i-user"/></svg><b>01</b></span>
+            <img src="images/pic 10.jpg" alt="Me" loading="lazy" onerror="this.closest('.tile').classList.add('missing')">
+            <span class="shade"></span>
+            <span class="num">01</span>
+            <span class="zoom"><svg class="ic"><use href="#i-expand"/></svg></span>
+            <span class="cap"><strong>Me</strong><em>The person behind MENDOZA.</em></span>
+          </button>
+        </li>
+
+        <!-- ===== 02 · MY STYLE — REPLACE IMAGE: images/gallery2.jpg ===== -->
+        <li class="rv" style="--d:0.08s">
+          <button class="tile" type="button" data-title="My Style" data-desc="Looks, colors and details that feel like me." aria-label="Open photo 02: My Style">
+            <span class="ph" aria-hidden="true"><svg class="ic"><use href="#i-star"/></svg><b>02</b></span>
+            <img src="images/pic 11.jpg" alt="My Style" loading="lazy" onerror="this.closest('.tile').classList.add('missing')">
+            <span class="shade"></span>
+            <span class="num">02</span>
+            <span class="zoom"><svg class="ic"><use href="#i-expand"/></svg></span>
+            <span class="cap"><strong>My Style</strong><em>Looks, colors and details that feel like me.</em></span>
+          </button>
+        </li>
+
+        <!-- ===== 03 · GAMING — REPLACE IMAGE: images/gallery3.jpg ===== -->
+        <li class="rv" style="--d:0.16s">
+          <button class="tile" type="button" data-title="Gaming" data-desc="Late-night sessions and clutch plays." aria-label="Open photo 03: Gaming">
+            <span class="ph" aria-hidden="true"><svg class="ic"><use href="#i-game"/></svg><b>03</b></span>
+            <img src="images/pic 3.jpg" alt="Gaming" loading="lazy" onerror="this.closest('.tile').classList.add('missing')">
+            <span class="shade"></span>
+            <span class="num">03</span>
+            <span class="zoom"><svg class="ic"><use href="#i-expand"/></svg></span>
+            <span class="cap"><strong>Gaming</strong><em>Late-night sessions and clutch plays.</em></span>
+          </button>
+        </li>
+
+        <!-- ===== 04 · FRIENDS — REPLACE IMAGE: images/gallery4.jpg ===== -->
+        <li class="rv" style="--d:0.00s">
+          <button class="tile" type="button" data-title="Friends" data-desc="The people who make every day better." aria-label="Open photo 04: Friends">
+            <span class="ph" aria-hidden="true"><svg class="ic"><use href="#i-users"/></svg><b>04</b></span>
+            <img src="images/pic 12.jpg" alt="Friends" loading="lazy" onerror="this.closest('.tile').classList.add('missing')">
+            <span class="shade"></span>
+            <span class="num">04</span>
+            <span class="zoom"><svg class="ic"><use href="#i-expand"/></svg></span>
+            <span class="cap"><strong>Friends</strong><em>The people who make every day better.</em></span>
+          </button>
+        </li>
+
+        <!-- ===== 05 · FAMILY — REPLACE IMAGE: images/gallery5.jpg ===== -->
+        <li class="rv" style="--d:0.08s">
+          <button class="tile" type="button" data-title="Family" data-desc="Home, support and where it all starts." aria-label="Open photo 05: Family">
+            <span class="ph" aria-hidden="true"><svg class="ic"><use href="#i-home"/></svg><b>05</b></span>
+            <img src="images/pic 13.jpg" alt="Family" loading="lazy" onerror="this.closest('.tile').classList.add('missing')">
+            <span class="shade"></span>
+            <span class="num">05</span>
+            <span class="zoom"><svg class="ic"><use href="#i-expand"/></svg></span>
+            <span class="cap"><strong>Family</strong><em>Home, support and where it all starts.</em></span>
+          </button>
+        </li>
+
+        <!-- ===== 06 · HOBBIES — REPLACE IMAGE: images/gallery6.jpg ===== -->
+        <li class="rv" style="--d:0.16s">
+          <button class="tile" type="button" data-title="Hobbies" data-desc="What I do when the screen is off." aria-label="Open photo 06: Hobbies">
+            <span class="ph" aria-hidden="true"><svg class="ic"><use href="#i-palette"/></svg><b>06</b></span>
+            <img src="images/pic 7.jpg" alt="Hobbies" loading="lazy" onerror="this.closest('.tile').classList.add('missing')">
+            <span class="shade"></span>
+            <span class="num">06</span>
+            <span class="zoom"><svg class="ic"><use href="#i-expand"/></svg></span>
+            <span class="cap"><strong>Hobbies</strong><em>What I do when the screen is off.</em></span>
+          </button>
+        </li>
+
+        <!-- ===== 07 · SCHOOL — REPLACE IMAGE: images/gallery7.jpg ===== -->
+        <li class="rv" style="--d:0.00s">
+          <button class="tile" type="button" data-title="School" data-desc="Learning, growing and leveling up." aria-label="Open photo 07: School">
+            <span class="ph" aria-hidden="true"><svg class="ic"><use href="#i-book"/></svg><b>07</b></span>
+            <img src="images/pic 8.jpg" alt="School" loading="lazy" onerror="this.closest('.tile').classList.add('missing')">
+            <span class="shade"></span>
+            <span class="num">07</span>
+            <span class="zoom"><svg class="ic"><use href="#i-expand"/></svg></span>
+            <span class="cap"><strong>School</strong><em>Learning, growing and leveling up.</em></span>
+          </button>
+        </li>
+
+        <!-- ===== 08 · MEMORIES — REPLACE IMAGE: images/gallery8.jpg ===== -->
+        <li class="rv" style="--d:0.08s">
+          <button class="tile" type="button" data-title="Memories" data-desc="Moments worth keeping forever." aria-label="Open photo 08: Memories">
+            <span class="ph" aria-hidden="true"><svg class="ic"><use href="#i-cam"/></svg><b>08</b></span>
+            <img src="images/pic 9.jpg" alt="Memories" loading="lazy" onerror="this.closest('.tile').classList.add('missing')">
+            <span class="shade"></span>
+            <span class="num">08</span>
+            <span class="zoom"><svg class="ic"><use href="#i-expand"/></svg></span>
+            <span class="cap"><strong>Memories</strong><em>Moments worth keeping forever.</em></span>
+          </button>
+        </li>
+
+        <!-- ===== 09 · TRAVEL — REPLACE IMAGE: images/gallery9.jpg ===== -->
+        <li class="rv" style="--d:0.16s">
+          <button class="tile" type="button" data-title="Travel" data-desc="New places, new perspectives." aria-label="Open photo 09: Travel">
+            <span class="ph" aria-hidden="true"><svg class="ic"><use href="#i-plane"/></svg><b>09</b></span>
+            <img src="images/pic 5.jpg" alt="Travel" loading="lazy" onerror="this.closest('.tile').classList.add('missing')">
+            <span class="shade"></span>
+            <span class="num">09</span>
+            <span class="zoom"><svg class="ic"><use href="#i-expand"/></svg></span>
+            <span class="cap"><strong>Travel</strong><em>New places, new perspectives.</em></span>
+          </button>
+        </li>
+
+        <!-- ===== 10 · TECHNOLOGY — REPLACE IMAGE: images/gallery10.jpg ===== -->
+        <li class="rv" style="--d:0.00s">
+          <button class="tile" type="button" data-title="Technology" data-desc="Gear, code and ideas I love." aria-label="Open photo 10: Technology">
+            <span class="ph" aria-hidden="true"><svg class="ic"><use href="#i-chip"/></svg><b>10</b></span>
+            <img src="images/pic 6.jpg" alt="Technology" loading="lazy" onerror="this.closest('.tile').classList.add('missing')">
+            <span class="shade"></span>
+            <span class="num">10</span>
+            <span class="zoom"><svg class="ic"><use href="#i-expand"/></svg></span>
+            <span class="cap"><strong>Technology</strong><em>Gear, code and ideas I love.</em></span>
+          </button>
+        </li>
+
+        <!-- ===== 11 · FAVORITES — REPLACE IMAGE: images/gallery11.jpg ===== -->
+        <li class="rv" style="--d:0.08s">
+          <button class="tile" type="button" data-title="Favorites" data-desc="A few of my favorite things." aria-label="Open photo 11: Favorites">
+            <span class="ph" aria-hidden="true"><svg class="ic"><use href="#i-heart"/></svg><b>11</b></span>
+            <img src="images/pic 4.jpg" alt="Favorites" loading="lazy" onerror="this.closest('.tile').classList.add('missing')">
+            <span class="shade"></span>
+            <span class="num">11</span>
+            <span class="zoom"><svg class="ic"><use href="#i-expand"/></svg></span>
+            <span class="cap"><strong>Favorites</strong><em>A few of my favorite things.</em></span>
+          </button>
+        </li>
+
+        <!-- ===== 12 · FUTURE GOALS — REPLACE IMAGE: images/gallery12.jpg ===== -->
+        <li class="rv" style="--d:0.16s">
+          <button class="tile" type="button" data-title="Future Goals" data-desc="Where I'm headed next." aria-label="Open photo 12: Future Goals">
+            <span class="ph" aria-hidden="true"><svg class="ic"><use href="#i-target"/></svg><b>12</b></span>
+            <img src="images/pic 1.jpg" alt="Future Goals" loading="lazy" onerror="this.closest('.tile').classList.add('missing')">
+            <span class="shade"></span>
+            <span class="num">12</span>
+            <span class="zoom"><svg class="ic"><use href="#i-expand"/></svg></span>
+            <span class="cap"><strong>Future Goals</strong><em>Where I'm headed next.</em></span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </section>
 </main>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer" aria-hidden="true">
+  <div class="lb__bg" data-close></div>
+  <button class="lb__btn lb__close" type="button" aria-label="Close"><svg class="ic"><use href="#i-x"/></svg></button>
+  <button class="lb__btn lb__prev" type="button" aria-label="Previous photo"><svg class="ic"><use href="#i-l"/></svg></button>
+  <button class="lb__btn lb__next" type="button" aria-label="Next photo"><svg class="ic"><use href="#i-r"/></svg></button>
+  <figure class="lb__fig">
+    <div class="lb__media" id="lbMedia">
+      <div class="ph" aria-hidden="true"><svg class="ic" id="lbIcon"><use href="#i-user"/></svg><b id="lbBig">01</b></div>
+      <img id="lbImg" alt="">
+    </div>
+    <figcaption class="lb__cap" id="lbCap">
+      <div><h3 id="lbTitle"></h3><p id="lbDesc"></p></div>
+      <span class="lb__count" id="lbCount"></span>
+    </figcaption>
+  </figure>
+</div>
 
 <footer>
   <div class="wrap">
@@ -438,6 +718,77 @@ footer small{color:rgba(255,255,255,.4)}
   } else {
     items.forEach(function(i){i.classList.add('in'); if(i.classList.contains('skill')) fillSkill(i);});
   }
+
+  /* ---- lightbox ---- */
+  var tiles=[].slice.call(document.querySelectorAll('.tile'));
+  var lb=document.getElementById('lb'), media=document.getElementById('lbMedia'), img=document.getElementById('lbImg'),
+      cap=document.getElementById('lbCap'), tEl=document.getElementById('lbTitle'), dEl=document.getElementById('lbDesc'),
+      cEl=document.getElementById('lbCount'), big=document.getElementById('lbBig'), icon=document.getElementById('lbIcon').firstElementChild;
+  var cur=0, lastFocus=null, closeTimer;
+  function pad(n){return (n<10?'0':'')+n;}
+
+  function fill(i){
+    var t=tiles[i], im=t.querySelector('img'), use=t.querySelector('.ph use');
+    media.classList.remove('missing'); img.style.visibility='';
+    img.onerror=function(){media.classList.add('missing');};
+    img.src=im.getAttribute('src'); img.alt=t.dataset.title;
+    tEl.textContent=t.dataset.title; dEl.textContent=t.dataset.desc;
+    cEl.textContent=pad(i+1)+' / '+pad(tiles.length); big.textContent=pad(i+1);
+    icon.setAttribute('href',use.getAttribute('href'));
+    /* preload neighbours */
+    [i-1,i+1].forEach(function(n){var k=(n+tiles.length)%tiles.length,p=new Image();p.src=tiles[k].querySelector('img').getAttribute('src');});
+  }
+  function show(i,dir){
+    cur=(i+tiles.length)%tiles.length;
+    if(!lb.classList.contains('open')||reduce||!dir){fill(cur);return;}
+    media.style.setProperty('--dir',(dir>0?'40px':'-40px'));
+    media.classList.add('swap'); cap.classList.add('swap');
+    setTimeout(function(){fill(cur);requestAnimationFrame(function(){media.classList.remove('swap');cap.classList.remove('swap');});},260);
+  }
+  function openLb(i){
+    clearTimeout(closeTimer); lastFocus=document.activeElement;
+    fill(i); cur=i; lb.setAttribute('aria-hidden','false');
+    document.body.classList.add('lb-open');
+    requestAnimationFrame(function(){lb.classList.add('open');});
+    lb.querySelector('.lb__close').focus({preventScroll:true});
+  }
+  function closeLb(){
+    lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); document.body.classList.remove('lb-open');
+    if(lastFocus) lastFocus.focus({preventScroll:true});
+  }
+  tiles.forEach(function(t,i){t.addEventListener('click',function(){openLb(i);});});
+  lb.querySelector('.lb__close').addEventListener('click',closeLb);
+  lb.querySelector('.lb__prev').addEventListener('click',function(){show(cur-1,-1);});
+  lb.querySelector('.lb__next').addEventListener('click',function(){show(cur+1,1);});
+  lb.addEventListener('click',function(e){if(e.target.hasAttribute('data-close')||e.target===lb)closeLb();});
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('open'))return;
+    if(e.key==='Escape')closeLb();
+    else if(e.key==='ArrowLeft')show(cur-1,-1);
+    else if(e.key==='ArrowRight')show(cur+1,1);
+    else if(e.key==='Tab'){ /* keep focus inside the viewer */
+      var f=[].slice.call(lb.querySelectorAll('button')), a=document.activeElement;
+      if(e.shiftKey&&a===f[0]){e.preventDefault();f[f.length-1].focus();}
+      else if(!e.shiftKey&&a===f[f.length-1]){e.preventDefault();f[0].focus();}
+    }
+  });
+  /* swipe on touch screens */
+  var sx=null;
+  lb.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
+  lb.addEventListener('touchend',function(e){
+    if(sx===null)return; var dx=e.changedTouches[0].clientX-sx; sx=null;
+    if(Math.abs(dx)>50) show(cur+(dx<0?1:-1),dx<0?1:-1);
+  },{passive:true});
+
+  /* ---- nav highlight: ABOUT ME / GALLERY ---- */
+  var gal=document.getElementById('gallery'), spyA=document.querySelector('[data-spy="about"]'), spyG=document.querySelector('[data-spy="gallery"]'), spyT=false;
+  function spy(){
+    spyT=false;
+    var inG=gal.getBoundingClientRect().top < innerHeight*.45;
+    spyG.toggleAttribute('aria-current',inG); if(inG)spyG.setAttribute('aria-current','page');
+    spyA.toggleAttribute('aria-current',!inG); if(!inG)spyA.setAttribute('aria-current','page');
+  }
+  addEventListener('scroll',function(){if(!spyT){spyT=true;requestAnimationFrame(spy);}},{passive:true}); spy();
 
   /* particles */
   var cv=document.getElementById('fx'), ctx=cv.getContext('2d'), W,H,dpr,pts=[];
